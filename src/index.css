@@ -1,0 +1,34 @@
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f2f4f7; 
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Global styles for the Astrolite theme */
+:root {
+  --primary-color: #5cb85c; 
+  --secondary-color: #6c757d; 
+  --text-color-dark: #343a40;
+  --text-color-light: #ffffff;
+  --bg-sidebar: #ffffff;
+  --bg-main: #f8f9fa;
+  --border-color: #e9ecef;
+  --header-bg: #ffffff;
+  --accent-blue: #007bff;
+  --accent-whatsapp: #25d366; 
+  --accent-mail: #dc3545; 
+}
+
+* {
+  box-sizing: border-box;
+}
