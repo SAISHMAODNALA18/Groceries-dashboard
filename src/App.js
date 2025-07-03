@@ -14,7 +14,44 @@ import { BsSunFill, BsMoonFill } from 'react-icons/bs'; // Import icons for ligh
 
 function App() {
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // --- Wishlist state and handler for popular products ---
+  const [wishlist, setWishlist] = useState({});
+  const toggleWishlist = (productName) => {
+    setWishlist((prev) => ({
+      ...prev,
+      [productName]: !prev[productName],
+    }));
+  };
+
+  // Product data for popular products (used for wishlist functionality)
+  const products = [
+    {
+      name: "Cabbage",
+      img: "cabbage.png",
+      stock: 210,
+      price: "$15.10",
+    },
+    {
+      name: "Kale vegetables",
+      img: "kale_vegetables.png",
+      stock: 124,
+      price: "$8.24",
+    },
+    {
+      name: "Brocoly",
+      img: "brocoli.png",
+      stock: 83,
+      price: "$5.93",
+    },
+    {
+      name: "Celery",
+      img: "Celery.png",
+      stock: 10,
+      price: "$4.80",
+    },
+  ];
 
   const toggleSidebar = () => {
     setIsSidebarHidden(!isSidebarHidden);
@@ -51,7 +88,7 @@ function App() {
           </li>
           <li className="sidebar-menu-item cart">
             <FaShoppingCart className="sidebar-icon" />
-            <span>Cart</span>
+            <span>Carts</span>
             <span className="item-count">8</span>
           </li>
           <li className="sidebar-menu-item message">
@@ -98,7 +135,6 @@ function App() {
           </div>
           <div className="header-profile-group">
             <FaBell className="header-icon notification" />
-          
             <button className="theme-toggle-button" onClick={toggleDarkMode}>
               {isDarkMode ? <BsSunFill className="header-icon" /> : <BsMoonFill className="header-icon" />}
             </button>
@@ -208,42 +244,24 @@ function App() {
                 <a href="#" className="view-all">See All</a>
               </div>
               <div className="product-grid">
-                <div className="product-card">
-                  <img src="cabbage.png" alt="Cabbage" />
-                  <div className="product-card-info">
-                    <div className="product-card-name">Cabbage</div>
-                    <div className="product-card-stock">210 stock</div>
-                    <div className="product-card-price">$15.10</div>
+                {products.map((product) => (
+                  <div className="product-card" key={product.name}>
+                    <img src={product.img} alt={product.name} />
+                    <div className="product-card-info">
+                      <div className="product-card-name">{product.name}</div>
+                      <div className="product-card-stock">{product.stock} stock</div>
+                      <div className="product-card-price">{product.price}</div>
+                    </div>
+                    <button className="add-to-cart-btn"><FaPlus /></button>
+                    <button
+                      className={`wishlist-btn${wishlist[product.name] ? " wished" : ""}`}
+                      onClick={() => toggleWishlist(product.name)}
+                      title={wishlist[product.name] ? "Remove from Wishlist" : "Add to Wishlist"}
+                    >
+                      <FaHeart />
+                    </button>
                   </div>
-                  <button className="add-to-cart-btn"><FaPlus /></button>
-                </div>
-                <div className="product-card">
-                  <img src="kale_vegetables.png" alt="Kale vegetables" />
-                  <div className="product-card-info">
-                    <div className="product-card-name">Kale vegetables</div>
-                    <div className="product-card-stock">124 stock</div>
-                    <div className="product-card-price">$8.24</div>
-                  </div>
-                  <button className="add-to-cart-btn"><FaPlus /></button>
-                </div>
-                <div className="product-card">
-                  <img src="brocoli.png" alt="Brocoly" />
-                  <div className="product-card-info">
-                    <div className="product-card-name">Brocoly</div>
-                    <div className="product-card-stock">83 stock</div>
-                    <div className="product-card-price">$5.93</div>
-                  </div>
-                  <button className="add-to-cart-btn"><FaPlus /></button>
-                </div>
-                <div className="product-card">
-                  <img src="Celery.png" alt="Celery" />
-                  <div className="product-card-info">
-                    <div className="product-card-name">Celery</div>
-                    <div className="product-card-stock">10 stock</div>
-                    <div className="product-card-price">$4.80</div>
-                  </div>
-                  <button className="add-to-cart-btn"><FaPlus /></button>
-                </div>
+                ))}
               </div>
             </div>
           </div>
